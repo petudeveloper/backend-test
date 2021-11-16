@@ -6,10 +6,8 @@
  - Conexión entre diferente sistemas.
  - Conceptos básicos de Base de Datos, Servicio Rest y Auth.
  - Manejo del tiempo.
- - Transiciones entre vistas.
  - Uso de librerías y/o Frameworks.
- - Utilización de comandos git
-
+ - Utilización de comandos git.
 
 
 # Mi tiendecita
