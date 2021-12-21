@@ -1,11 +1,13 @@
 class Api::V1::StoresController < ApplicationController
+  # before_action :authenticate_user!
+
   def index
     @stores = Store.all
     render json: { stores: @stores, code: 200 }
   end
 
   def create
-    @store = Store.new(request_parameters)
+    @store = Store.new(body_params)
     if @store.save
       render json: {
         message: 'Store Added',
@@ -15,6 +17,22 @@ class Api::V1::StoresController < ApplicationController
       render json: {
         message: @store.errors.messages,
         code: 417
+      }
+    end
+  end
+
+  def update
+    @store = Store.find(params[:id])
+
+    if @store.update(body_params)
+      render json: {
+        message: 'Store Updated',
+        code: 201
+      }
+    else
+      render json: {
+        message: @store.errors.messages,
+        code: 400
       }
     end
   end
@@ -35,4 +53,9 @@ class Api::V1::StoresController < ApplicationController
     end
   end
 
+  private
+
+  def body_params
+    params.permit(:nombre, :direccion, :telefono, :id)
+  end
 end
